@@ -1,0 +1,20 @@
+def paths(m, n, N, i, j):
+    dp = [[0]*n for _ in range(m)]
+    dp[i][j] = 1
+    ans = 0
+
+    for _ in range(N):
+        new = [[0]*n for _ in range(m)]
+        for r in range(m):
+            for c in range(n):
+                for dr, dc in [(1,0),(-1,0),(0,1),(0,-1)]:
+                    x, y = r+dr, c+dc
+                    if 0 <= x < m and 0 <= y < n:
+                        new[x][y] += dp[r][c]
+                    else:
+                        ans += dp[r][c]
+        dp = new
+    return ans
+
+print(paths(2, 2, 2, 0, 0))  
+print(paths(1, 3, 3, 0, 1))  
